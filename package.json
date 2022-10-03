@@ -1,0 +1,21 @@
+{
+  "name": "grafana-alerts-to-gotify",
+  "author": "Ryan Wallace",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/cubismod/grafana-alerts-to-gotify.git"
+  },
+  "dependencies": {
+    "@kapsonfire/bun-bakery": "^0.3.2",
+    "bun-types": "^0.1.11",
+    "loglevel": "^1.8.0",
+    "nodemon": "^2.0.20",
+    "roarr": "^7.13.0"
+  },
+  "scripts": {
+    "dev": "nodemon --config nodemon.json"
+  }
+}

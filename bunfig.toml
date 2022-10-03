@@ -1,0 +1,5 @@
+logLevel = "info"
+
+[bundle]
+saveTo = "node_modules.bun"
+entryPoints = ["./src/main.ts"]
