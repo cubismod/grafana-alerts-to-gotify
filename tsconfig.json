@@ -2,9 +2,9 @@
   "compilerOptions": {
     "module": "ESNext",
     "target": "ESNext",
+    "outDir": "./build",
     "rootDir": "./src",
     "sourceMap": true,
-
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -12,7 +12,6 @@
     "typeRoots": [
       "src/types"
     ],
-    "types": ["bun-types"],
     "lib": [
       "es2021",
       "esnext.asynciterable"
@@ -27,6 +26,11 @@
     "importHelpers": true,
     "moduleResolution": "Node"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
 }

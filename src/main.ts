@@ -1,39 +1,41 @@
-import {Context, Router} from '@kapsonfire/bun-bakery'
-import * as process from "process";
-import {
-    Roarr as log,
-} from 'roarr';
+
+import { dirname, importx } from '@discordx/importer';
+import { Koa } from '@discordx/koa';
+import { logger } from './logger';
 
 export class Main {
-    private checkEnv(key: string, val?: string) {
-        if (!val) {
-            log(`Environment variable ${key} not defined, required for starting the application`)
-            return false
-        }
-        return true
+  private checkEnv(key: string, val?: string) {
+    if (!val) {
+      logger.error(`Environment variable ${key} not defined, required for starting the application`);
+      return false;
+    }
+    return true;
+  }
+
+  async start() {
+    let err: boolean | undefined = false;
+
+    err = this.checkEnv('GRAFANA_TOKEN', process.env.GRAFANA_TOKEN);
+    err = this.checkEnv('ALERTMANAGER_TOKEN', process.env.ALERTMANAGER_TOKEN);
+    err = this.checkEnv('GOTIFY_URL', process.env.GOTIFY_URL);
+    err = this.checkEnv('GOTIFY_TOKEN', process.env.GOTIFY_TOKEN);
+
+    if (!err) {
+      console.error('Missing required environment variable(s), application exiting.');
+      return -1;
     }
 
-    start() {
-        let err = false
+    const port = 45045;
+    const server = new Koa();
 
-        err = this.checkEnv('GRAFANA_TOKEN', process.env.GRAFANA_TOKEN)
-        err = this.checkEnv('ALERTMANAGER_TOKEN', process.env.ALERTMANAGER_TOKEN)
-        err = this.checkEnv('GOTIFY_URL', process.env.GOTIFY_URL)
-        err = this.checkEnv('GOTIFY_TOKEN', process.env.GOTIFY_TOKEN)
+    importx(dirname(import.meta.url) + '/router.js');
+    await server.build();
 
-        if (err) {
-            log.error('Missing required environment variable(s), application exiting.')
-            return -1
-        }
-
-        const router = new Router({
-            routesPath: './routes/'
-        })
-
-        router.addMiddleware({
-            onResponse: (ctx: Context) => {
-                log(JSON.stringify(ctx))
-            }
-        })
-    }
+    server.listen(port, () => {
+      logger.info('Available at http://localhost:45045');
+    });
+  }
 }
+
+const main = new Main();
+await main.start();
