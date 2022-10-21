@@ -1,5 +1,5 @@
 # grafana-alerts-to-gotify
-A Node.js Bun app that takes alerts from https://grafana.com and sends them to a Gotify instance.
+A Node.js app that takes alerts from https://grafana.com and sends them to a Gotify instance.
 
 ## Supported Webhook Types
 | Type                                                                                                   | Environment Variables | Web Endpoint    |

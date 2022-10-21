@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug",
+            "program": "${workspaceFolder}/build/main.js",
+            "envFile": "${workspaceFolder}/.env",
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "sourceMaps": true,
+            "outputCapture": "std",
+            "runtimeArgs": [
+                "--es-module-specifier-resolution=node"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/build/**/*.js",
+                "!**/node_modules/**"
+            ]
+        },
+    ],
+    "compounds": []
+}

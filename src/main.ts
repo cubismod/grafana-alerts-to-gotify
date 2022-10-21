@@ -4,6 +4,7 @@ import { Koa } from '@discordx/koa';
 import { logger } from './logger';
 
 export class Main {
+  private server = new Koa();
   private checkEnv(key: string, val?: string) {
     if (!val) {
       logger.error(`Environment variable ${key} not defined, required for starting the application`);
@@ -26,12 +27,14 @@ export class Main {
     }
 
     const port = 45045;
-    const server = new Koa();
 
-    importx(dirname(import.meta.url) + '/router.js');
-    await server.build();
+    const filename = dirname(import.meta.url) + '/router.js';
+    logger.info(filename);
+    await importx(filename);
 
-    server.listen(port, () => {
+    await this.server.build();
+
+    this.server.listen(port, () => {
       logger.info('Available at http://localhost:45045');
     });
   }
