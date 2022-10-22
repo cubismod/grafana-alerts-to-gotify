@@ -20,6 +20,7 @@ export class Main {
     err = this.checkEnv('ALERTMANAGER_TOKEN', process.env.ALERTMANAGER_TOKEN);
     err = this.checkEnv('GOTIFY_URL', process.env.GOTIFY_URL);
     err = this.checkEnv('GOTIFY_TOKEN', process.env.GOTIFY_TOKEN);
+    err = this.checkEnv('AUTH', process.env.AUTH);
 
     if (!err) {
       console.error('Missing required environment variable(s), application exiting.');

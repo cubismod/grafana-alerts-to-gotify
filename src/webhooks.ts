@@ -1,40 +1,124 @@
+import { JSONObject } from 'ts-json-object';
+
+// https://grafana.com/docs/grafana/latest/alerting/contact-points/notifiers/webhook-notifier/
 export namespace Grafana {
-    export interface Alert {
-        status: string,
-        startsAt: string,
-        endsAt: string,
-        valueString: string,
-        generatorUrl: string,
-        fingerprint: string,
-        silenceURL: string
+    export class Alert extends JSONObject {
+        @JSONObject.required
+          status: string;
+
+        @JSONObject.required
+          labels: any;
+
+        @JSONObject.required
+          annotations: any;
+
+        @JSONObject.required
+          startsAt: string;
+
+        @JSONObject.required
+          endsAt: string;
+
+        @JSONObject.required
+          valueString: string;
+
+        @JSONObject.required
+          generatorUrl: string;
+
+        @JSONObject.required
+          fingerprint: string;
+
+        @JSONObject.required
+          silenceURL: string;
     }
-    export interface Webhook {
-        reciever: string,
-        status: string,
-        orgId: number,
-        alerts: Alert[],
-        externalURL: string,
-        version: string,
-        groupKey: string,
-        truncatedAlerts: number
+    export class Webhook extends JSONObject {
+      @JSONObject.required
+        receiver: string;
+
+      @JSONObject.required
+        status: string;
+
+      @JSONObject.required
+        orgId: number;
+
+      @JSONObject.required
+        alerts: Alert[];
+
+      @JSONObject.required
+        groupLabels: any;
+
+      @JSONObject.required
+        commonLabels: any;
+
+      @JSONObject.required
+        commonAnnotations: any;
+
+      @JSONObject.required
+        externalURL: string;
+
+      @JSONObject.required
+        version: string;
+
+      @JSONObject.required
+        groupKey: string;
+
+      @JSONObject.required
+        truncatedAlerts: number;
     }
 }
 
+// https://prometheus.io/docs/alerting/latest/configuration/#webhook_config
 export namespace AlertManager {
-    export interface Alert {
-        status: string,
-        startsAt: string,
-        endsAt: string,
-        generatorURL: string,
-        fingerprint: string
+    export class Alert extends JSONObject {
+      @JSONObject.required
+        status: string;
+
+      @JSONObject.required
+        labels: any;
+
+      @JSONObject.required
+        annotations: any;
+
+      @JSONObject.required
+        startsAt: string;
+
+      @JSONObject.required
+        endsAt: string;
+
+      @JSONObject.required
+        generatorURL: string;
+
+      @JSONObject.required
+        fingerprint: string;
     }
-    export interface Webhook {
-        version: string,
-        groupKey: string,
-        truncatedAlerts: number
-        status: string,
-        receiver: string,
-        externalURL: string,
-        alerts: Alert[]
+    export class Webhook extends JSONObject {
+      @JSONObject.required
+        version: string;
+
+      @JSONObject.required
+        groupKey: string;
+
+      @JSONObject.required
+        truncatedAlerts: number;
+
+      @JSONObject.required
+        status: string;
+
+      @JSONObject.required
+        receiver: string;
+
+      @JSONObject.required
+        groupLabels: any;
+
+      @JSONObject.required
+        commonLabels: any;
+
+      @JSONObject.required
+        commonAnnotations: any;
+
+      @JSONObject.required
+        externalURL: string;
+
+      @JSONObject.required
+        alerts: Alert[];
     }
 }
